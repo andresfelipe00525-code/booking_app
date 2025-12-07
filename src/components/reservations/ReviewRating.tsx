@@ -1,7 +1,11 @@
 import { useState } from 'react';
-import type { ReviewRatingProps } from '../../types';
 import { FaStar } from 'react-icons/fa6';
-import { cn } from '../../utils';
+import { cn } from '@/utils/cn';
+import type { ReviewForm } from '../../types';
+
+interface ReviewRatingProps {
+	setReview: React.Dispatch<React.SetStateAction<ReviewForm>>;
+}
 
 const ReviewRating = ({ setReview }: ReviewRatingProps) => {
 	const [rating, setRating] = useState<number>(0);
@@ -9,6 +13,7 @@ const ReviewRating = ({ setReview }: ReviewRatingProps) => {
 
 	const handleSelect = (value: number) => {
 		setRating(value);
+
 		setReview((prev) => ({
 			...prev,
 			rating: value,

@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import useApiFetch from '../../hooks/useApiFetch';
-import ReviewRating from './ReviewRating';
+import { FaStar } from 'react-icons/fa6';
+import { cn } from '../../utils'; // ✅ corregido también
 import type { ReviewForm } from '../../types';
-import toast from 'react-hot-toast';
 
-interface ReviewProps {
-	hotelId: number;
-	closeModal: () => void;
+interface ReviewRatingProps {
+	setReview: React.Dispatch<React.SetStateAction<ReviewForm>>;
 }
 
 const initialState: ReviewForm = {

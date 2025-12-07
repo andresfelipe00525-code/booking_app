@@ -13,13 +13,18 @@ const Gallery = ({ images }: GalleryProps) => {
 
 	return (
 		<div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-			{images.map((img, index) => (
-				<div
-					key={index}
-					className="h-40 rounded-2xl bg-gray-200 shadow-md bg-cover bg-center"
-					style={{ backgroundImage: `url(${img})` }}
-				/>
-			))}
+			{images.map((img, index) => {
+				// ✅ Forzamos HTTPS
+				const safeImage = img.replace('http://', 'https://');
+
+				return (
+					<div
+						key={index}
+						className="h-40 rounded-2xl bg-gray-200 shadow-md bg-cover bg-center"
+						style={{ backgroundImage: `url(${safeImage})` }}
+					/>
+				);
+			})}
 		</div>
 	);
 };

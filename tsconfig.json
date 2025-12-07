@@ -7,11 +7,8 @@
       "DOM.Iterable"
     ],
     "module": "ESNext",
-    "skipLibCheck": true,
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
+    "skipLibCheck": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "strict": true,
@@ -20,9 +17,19 @@
       "@/*": [
         "src/*"
       ]
-    }
+    },
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": false,
+    "moduleDetection": "force",
+    "types": [
+      "vite/client"
+    ]
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

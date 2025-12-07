@@ -1,15 +1,27 @@
-import type { ReservationListProps } from '../../types';
 import ReservationCard from './ReservationCard';
+
+export interface Reservation {
+	id: number;
+	hotelName?: string;
+	date?: string;
+	rating?: number;
+}
+
+interface ReservationsListProps {
+	reservations: Reservation[];
+	onDelete: (id: number) => void;
+	onRate: (id: number, rating: number) => void;
+}
 
 const ReservationsList = ({
 	reservations,
 	onDelete,
 	onRate,
-}: ReservationListProps) => {
-	if (!reservations.length) {
+}: ReservationsListProps) => {
+	if (!reservations || reservations.length === 0) {
 		return (
 			<div className="flex h-40 items-center justify-center rounded-3xl bg-white/80 text-gray-500 shadow-md backdrop-blur-xl">
-				No reservations found.
+				No reservation found.
 			</div>
 		);
 	}
