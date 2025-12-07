@@ -1,6 +1,13 @@
 import { useState, useCallback } from 'react';
-import type { ApiRequestOptions } from '../types';
 import api from '../app/services/api';
+
+/* ✅ Definimos el tipo aquí mismo para evitar errores en Vercel */
+interface ApiRequestOptions {
+	url: string;
+	method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+	data?: any;
+	headers?: Record<string, string>;
+}
 
 function useApiFetch<T = any>() {
 	const [data, setData] = useState<T>([] as T);
@@ -16,7 +23,7 @@ function useApiFetch<T = any>() {
 				const response = await api({
 					url,
 					method,
-					data, // ✅ AXIOS USA data, NO body
+					data, // ✅ AXIOS usa "data", no "body"
 					headers,
 				});
 
