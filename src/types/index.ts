@@ -1,4 +1,4 @@
-// ✅ IMÁGENES DEL HOTEL
+// ✅ IMÁGENES
 export interface HotelImage {
 	id: number;
 	url: string;
@@ -13,7 +13,7 @@ export interface City {
 	countryId: string;
 }
 
-// ✅ HOTEL COMPLETO (SEGÚN TU API REAL)
+// ✅ HOTEL COMPLETO (EL REAL DE TU API)
 export interface Hotel {
 	id: number;
 	name: string;
@@ -23,15 +23,16 @@ export interface Hotel {
 	lat: string;
 	lon: string;
 	rating: string | null;
-	images?: HotelImage[];
-	city?: City;
+	images: HotelImage[];
+	city: City;
 }
 
+// ✅ PROPS DE HOTEL CARD
 export interface HotelCardProps {
 	hotel: Hotel;
 }
 
-export interface ReviewForm {
-	rating: number;
-	comment: string;
+// ✅ PROPS DE HOTEL LIST
+export interface HotelListProps {
+	hotels: Hotel[];
 }

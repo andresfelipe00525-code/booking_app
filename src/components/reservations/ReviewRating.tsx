@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { cn } from '@/utils/cn';
-import type { ReviewForm } from '../../types';
+
+interface ReviewForm {
+	rating: number;
+	comment: string;
+}
 
 interface ReviewRatingProps {
 	setReview: React.Dispatch<React.SetStateAction<ReviewForm>>;
