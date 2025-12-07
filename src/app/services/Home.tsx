@@ -12,6 +12,17 @@ interface Hotel {
 	images?: HotelImage[];
 }
 
+// ✅ FUNCIÓN SEGURA PARA IMÁGENES (FUERA DEL COMPONENTE)
+const getImageUrl = (url?: string) => {
+	if (!url) return 'https://placehold.co/600x400?text=No+Image';
+
+	if (url.startsWith('http')) {
+		return url; // ✅ NO forzar https
+	}
+
+	return `${import.meta.env.VITE_API_URL}/${url.replace(/^\/+/, '')}`;
+};
+
 const Home = () => {
 	const [hotels, setHotels] = useState<Hotel[]>([]);
 	const [loading, setLoading] = useState(true);
@@ -39,7 +50,7 @@ const Home = () => {
 
 	return (
 		<div className="space-y-12">
-			{/* HERO */}
+			{/* ✅ HERO */}
 			<section className="rounded-3xl bg-white/80 p-10 shadow-xl backdrop-blur-xl border border-white/40 text-center">
 				<h2 className="text-4xl font-semibold tracking-tight text-gray-900">
 					Encuentra tu próximo destino
@@ -49,15 +60,10 @@ const Home = () => {
 				</p>
 			</section>
 
-			{/* LISTADO DE HOTELES */}
+			{/* ✅ LISTADO DE HOTELES */}
 			<section className="grid grid-cols-1 md:grid-cols-3 gap-8">
 				{hotels.map((hotel) => {
-					// ✅ IMAGEN 100% SEGURA DESDE TU API
-					const imageUrl = hotel.images?.length
-						? hotel.images[0].url.startsWith('http')
-							? hotel.images[0].url
-							: `${import.meta.env.VITE_API_URL}/${hotel.images[0].url}`
-						: 'https://placehold.co/600x400?text=No+Image';
+					const imageUrl = getImageUrl(hotel.images?.[0]?.url);
 
 					return (
 						<Link
@@ -65,7 +71,6 @@ const Home = () => {
 							to={`/details/${hotel.id}`}
 							className="group rounded-3xl bg-white/80 p-6 shadow-lg backdrop-blur-xl border border-white/40 hover:shadow-2xl transition"
 						>
-							{/* ✅ IMAGEN */}
 							<img
 								src={imageUrl}
 								alt={hotel.name}

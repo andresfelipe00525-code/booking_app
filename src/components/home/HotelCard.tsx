@@ -2,11 +2,19 @@ import { Link } from 'react-router-dom';
 import type { HotelCardProps } from '@/types';
 import RatingStars from '../../RatingStars';
 
+// ✅ FUNCIÓN FUERA DEL COMPONENTE
+const getImageUrl = (url?: string) => {
+	if (!url) return null;
+
+	if (url.startsWith('http')) {
+		return url.replace('http://', 'https://');
+	}
+
+	return `${import.meta.env.VITE_API_URL}/${url}`;
+};
+
 const HotelCard = ({ hotel }: HotelCardProps) => {
-	const imageUrl =
-		hotel.images?.length && hotel.images[0]?.url
-			? hotel.images[0].url.replace('http://', 'https://')
-			: null;
+	const imageUrl = getImageUrl(hotel.images?.[0]?.url);
 
 	return (
 		<Link
